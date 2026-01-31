@@ -1,30 +1,22 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const auditLogSchema = new mongoose.Schema({
+const auditSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true
   },
 
-  action: {
-    type: String,
-    required: true
-  },
+  action: String,
 
   timestamp: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    immutable: true,
   },
-
-  prevHash: {
-    type: String
-  },
-
-  hash: {
-    type: String,
-    required: true
-  }
 });
 
-export default mongoose.model("AuditLog", auditLogSchema);
+auditSchema.pre("deleteOne", () => {
+  throw new Error("Cannot delete logs");
+});
+
+export default mongoose.model("AuditLog", auditSchema);

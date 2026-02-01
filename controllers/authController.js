@@ -31,7 +31,7 @@ export const verifyLink = async (req, res) => {
       </head>
       <body>
         <h2>Verify Your Account</h2>
-        <form action="/api/auth/verify" method="POST" onsubmit="submitForm(event)">
+        <form action="/api/v1/auth/verify" method="POST" onsubmit="submitForm(event)">
           <input type="hidden" name="token" value="${token}">
           <label for="password">Create a password:</label>
           <input type="password" id="password" name="password" required minlength="6">
@@ -44,7 +44,7 @@ export const verifyLink = async (req, res) => {
             const token = form.elements['token'].value;
             const password = form.elements['password'].value;
             
-            const response = await fetch('/api/auth/verify', {
+            const response = await fetch('/api/v1/auth/verify', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({ token, password })

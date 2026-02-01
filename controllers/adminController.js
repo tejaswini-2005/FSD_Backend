@@ -14,7 +14,7 @@ export const inviteUser = async (req, res) => {
     verifyToken: token,
   });
 
-  const link = `http://localhost:8080/api/auth/verify-link/${token}`;
+  const link = `http://localhost:8080/api/v1/auth/verify-link/${token}`;
 
   await transporter.sendMail({
     to: email,
